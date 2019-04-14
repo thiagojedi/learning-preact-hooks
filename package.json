@@ -27,8 +27,7 @@
   "@pika/web": {
     "webDependencies": [
       "preact",
-      "preact/hooks",
-      "preact-render-to-string"
+      "preact/hooks"
     ]
   },
   "bundleStyle": {
