@@ -34,7 +34,7 @@ function createRequest(method: Method, url: string, data?: any): Promise<any> {
   })
 }
 
-export const getJson = (url: string, data?: any) => createRequest('GET', url, { ...data, channel: 'SAMSUNGTV' })
+export const getJson = (url: string, data?: any) => createRequest('GET', url, data)
 export const postJson = (url: string, data?: any) => createRequest('POST', url, data)
 
 function setQueryString(uri: string, key: string, value: string) {
