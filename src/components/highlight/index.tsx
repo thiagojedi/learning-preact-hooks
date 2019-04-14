@@ -2,7 +2,7 @@ import { h } from '/web_modules/preact.js'
 import { useContentDetails } from '../../hooks/content.js';
 
 interface HighlightProps {
-    contentId: number
+    contentId: number | string
 }
 
 export const Highlight = ({ contentId }: HighlightProps) => {
