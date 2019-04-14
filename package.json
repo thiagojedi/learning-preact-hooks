@@ -9,7 +9,6 @@
     "start": "http-serve",
     "build": "tsc -p . && npm run style",
     "style": "bundle-scss --config && sass --no-source-map ./tmp/:./dist/",
-    "prebuild": "rm -r ./dist/",
     "postbuild": "rm -r ./tmp/"
   },
   "author": "",
