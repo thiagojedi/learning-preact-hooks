@@ -1,31 +1,30 @@
 import { h, render } from '/web_modules/preact.js'
-import { useEffect, useState } from '/web_modules/preact/hooks.js'
+import { useState } from '/web_modules/preact/hooks.js'
 import { Highlight } from './components/highlight/index.js'
-
-const contents = ['bumblebee-2018', 'aquaman-2018', 'the-witches-1990']
+import { GlobalStateProvider, storeReducers } from './store/index.js';
+import { Carrosel } from './components/carrosel.js';
 
 const App = () => {
-    const [index, setindex] = useState(0)
-
-    useEffect(() => {
-        const interval = setInterval(() => setindex(i => i === contents.length - 1 ? 0 : i + 1), 5000);
-        return () => clearInterval(interval);
-    }, [])
+    const [contents] = useState(['bumblebee-2018', 'aquaman-2018', 'the-witches-1990']);
 
     return (
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <Highlight contentId={contents[index]} />
+        <GlobalStateProvider reducer={storeReducers}>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <Highlight />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <Carrosel contents={contents} />
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    {/* Clocar um carrosel aqui */}
-                </div>
-            </div>
-        </div>
+        </GlobalStateProvider>
     )
 }
+
+
 
 render(<App />, document.body)

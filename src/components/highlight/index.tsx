@@ -1,17 +1,19 @@
 import { h } from '/web_modules/preact.js'
 import { useContentDetails } from '../../hooks/content.js';
+import { useGlobalState } from '../../store/index.js';
 
-interface HighlightProps {
-    contentId: number | string
-}
 
-export const Highlight = ({ contentId }: HighlightProps) => {
-    const [content] = useContentDetails(contentId)
+export const Highlight = () => {
+    const [state] = useGlobalState();
+    console.info(state);
+    const contentId = state.content.highlightId;
+    const [contentDetails] = useContentDetails(contentId)
 
     return (
         <div class="highlight">
-            <h1 class="highlight__title">{content.title}</h1>
-            <p class="highlight__description">{content.overview}</p>
+            <small>{contentId}</small>
+            <h1 class="highlight__title">{contentDetails.title}</h1>
+            <p class="highlight__description">{contentDetails.overview}</p>
         </div>
     )
 }

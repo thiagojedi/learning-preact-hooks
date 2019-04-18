@@ -17,5 +17,7 @@
         "web_modules/*.js",
       ]
     },
+
+    "strictNullChecks": true,
   }
 }
