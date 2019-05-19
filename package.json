@@ -4,17 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "pika-web --optimize",
+    "postinstall": "pika-web",
     "prestart": "npm run build",
     "start": "http-serve",
     "build": "tsc -p . && npm run style",
-    "style": "bundle-scss --config && sass --no-source-map ./tmp/:./dist/",
-    "postbuild": "rm -r ./tmp/"
+    "style": "bundle-scss --config && sass --no-source-map ./tmp/:./dist/"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "preact": "^10.0.0-alpha.4"
+    "preact": "^10.0.0-beta.1"
   },
   "devDependencies": {
     "@pika/web": "^0.4.2",
@@ -26,7 +25,8 @@
   "@pika/web": {
     "webDependencies": [
       "preact",
-      "preact/hooks"
+      "preact/hooks",
+      "preact/debug"
     ]
   },
   "bundleStyle": {
