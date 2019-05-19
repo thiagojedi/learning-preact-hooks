@@ -1,40 +1,20 @@
-import { h, createContext, PreactContext } from '/web_modules/preact.js';
+import { h, createContext, PreactContext, FunctionalComponent } from '/web_modules/preact.js';
 import { useReducer, useContext } from '/web_modules/preact/hooks.js';
-
-interface StoreState {
-    content: {
-        highlightId?: string;
-    }
-}
 
 const initialState: StoreState = {
     content: {
-        highlightId: undefined
+        highlightId: undefined,
+        details: {}
     }
 };
 
 export const StateContext: PreactContext<[StoreState, (actions: any) => void]> = createContext([] as any);
 
-function getInitialValue<T>(reducer, state: T) {
-    return useReducer(reducer, state)
-}
-export const GlobalStateProvider = ({ reducer, children }) => (
-    <StateContext.Provider value={getInitialValue(reducer, initialState)} >
+export const GlobalStateProvider: FunctionalComponent<{ reducers: any }> = ({ reducers, children }) => (
+    <StateContext.Provider value={useReducer(reducers, initialState)} >
         {children}
     </StateContext.Provider>
 );
 
 export const useGlobalState = () => useContext(StateContext);
 
-const contentReducers = (state, action) => {
-    switch (action.type) {
-        case 'highlightItem':
-            return { ...state, highlightId: action.id }
-        default:
-            break;
-    }
-}
-
-export const storeReducers = (state, action) => ({
-    content: contentReducers(state, action)
-})

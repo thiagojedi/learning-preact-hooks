@@ -5,9 +5,10 @@ import { useGlobalState } from '../../store/index.js';
 
 export const Highlight = () => {
     const [state] = useGlobalState();
-    console.info(state);
     const contentId = state.content.highlightId;
-    const [contentDetails] = useContentDetails(contentId)
+    
+    const defaultContent = { title: '', overview: '' };
+    const [contentDetails = defaultContent] = useContentDetails(contentId)
 
     return (
         <div class="highlight">

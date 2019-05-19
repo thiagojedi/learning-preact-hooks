@@ -3,14 +3,15 @@ import '/web_modules/preact/debug.js';
 import { h, render } from '/web_modules/preact.js'
 import { useState } from '/web_modules/preact/hooks.js'
 import { Highlight } from './components/highlight/index.js'
-import { GlobalStateProvider, storeReducers } from './store/index.js';
+import { GlobalStateProvider } from './store/index.js';
+import { storeReducers } from './store/reducers.js';
 import { Carrosel } from './components/carrosel.js';
 
 const App = () => {
     const [contents] = useState(['bumblebee-2018', 'aquaman-2018', 'the-witches-1990']);
 
     return (
-        <GlobalStateProvider reducer={storeReducers}>
+        <GlobalStateProvider reducers={storeReducers}>
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -29,4 +30,4 @@ const App = () => {
 
 
 
-render(<App />, document.body)
+render(<App />, document.body);
