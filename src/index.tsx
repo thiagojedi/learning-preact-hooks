@@ -28,6 +28,4 @@ const App = () => {
     )
 }
 
-
-
 render(<App />, document.body);
