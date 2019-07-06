@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "pika-web",
     "prestart": "npm run build",
-    "start": "http-serve",
+    "start": "serve",
     "build": "tsc -p . && npm run style",
     "style": "bundle-scss --config && sass --no-source-map ./tmp/:./dist/"
   },
