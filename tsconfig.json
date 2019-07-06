@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "moduleResolution": "node",
+    "module": "esnext",
 
     "rootDir": "./src",
     "outDir": "./dist",
@@ -14,10 +15,10 @@
     "paths": {
       "/web_modules/*.js": [
         "node_modules/*",
-        "web_modules/*.js",
+        "web_modules/*.js"
       ]
     },
 
-    "strictNullChecks": true,
+    "strictNullChecks": true
   }
 }

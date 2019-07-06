@@ -1,4 +1,5 @@
-import '/web_modules/preact/debug.js';
+if (window.location.href.includes('localhost'))
+    import('/web_modules/preact/debug.js');
 
 import { h, render } from '/web_modules/preact.js'
 import { useState } from '/web_modules/preact/hooks.js'
