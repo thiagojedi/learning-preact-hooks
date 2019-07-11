@@ -1,37 +1,24 @@
 type Method = 'DELETE' | 'GET' | 'POST' | 'PUT'
 
-function createRequest(method: Method, url: string, data?: any): Promise<any> {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest()
-
-    
-    if (method === 'GET')
+async function createRequest(method: Method, url: string, data?: any): Promise<any> {
+  let body: string | undefined = undefined;
+  if (method === 'GET') {
     url = objectToKeyValue(data)
-    .reduce((prevUrl, { key, value }) => setQueryString(prevUrl, key, value), url)
-    
-    xhr.open(method, url)
+      .reduce((prevUrl, { key, value }) => setQueryString(prevUrl, key, value), url)
+  } else {
+    body = JSON.stringify(data);
+  }
 
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('trakt-api-version', '2');
-    xhr.setRequestHeader('trakt-api-key', '[client key]');
+  const headers = {
+    'Content-Type': 'application/json',
+    'trakt-api-version': '2',
+    'trakt-api-key': '[client key]',
+  }
 
-    xhr.onload = () => {
-      let jsonResponse = {} as any
-      try {
-        jsonResponse = JSON.parse(xhr.responseText)
-      } catch {
-        // Cannot parse response
-      }
-
-      if (xhr.status >= 200 && xhr.status < 300)
-        resolve(jsonResponse)
-      else
-        reject(jsonResponse)
-    }
-    xhr.onerror = () => reject({ status: 'failed' })
-
-    xhr.send(data)
-  })
+  const r = await fetch(url, { method, body, headers });
+  if (!r.ok)
+    throw new Error(r.statusText);
+  return r.json();
 }
 
 export const getJson = (url: string, data?: any) => createRequest('GET', url, data)
